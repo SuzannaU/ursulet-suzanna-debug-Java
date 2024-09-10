@@ -4,9 +4,28 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import Reader.*;
+import Writer.*;
+
+
 public class AnalyticsCounter {	
 	public static void main(String args[]){
-		try{
+		//ReadSymptomDataFromFile file = new ReadSymptomDataFromFile("symptoms.txt");
+		//System.out.println(file.getSymptoms().toString());
+		//file.printSymptoms();
+		//file.getSymptoms();
+		//Counter file2 = new Counter("symptoms.txt");
+		//file2.addSymptoms();
+		//file2.printSymptomsQuantity();
+		Writer file3 = new Writer("symptoms.txt");
+		file3.writeInFile();
+
+		//file.addSymptoms();
+		//file.printSymptomsQuantity();
+
+
+
+/* 		try{
 			int headCount = 0;
 			int rashCount = 0;
 			int pupilCount = 0;
@@ -35,6 +54,6 @@ public class AnalyticsCounter {
 			writer.close();
 		} catch (IOException e){
 			System.out.println("File not accessible");
-		}
+		} */
 	}
 }
