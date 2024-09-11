@@ -1,8 +1,9 @@
-package Reader;
+package Classes;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,30 +33,37 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	 * @return ArrayList<String> containing all symptoms read
 	 */
 	@Override
-	public List<String> getSymptoms() {
+	public List<String> getSymptoms() throws IllegalArgumentException, IOException {
 		ArrayList<String> result = new ArrayList<String>();
 		if (filepath != null) {
 			try {
 				BufferedReader reader = new BufferedReader (new FileReader(filepath));
-				String line = reader.readLine();
-				
+				String line = reader.readLine();				
 				while (line != null) {
 					result.add(line);
 					line = reader.readLine();
 				}
 				reader.close();
+			} catch (FileNotFoundException e) {
+				logger.error(filepath + " cannot be found.");
+				throw new FileNotFoundException(filepath + " cannot be found.");
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error("Cannot read " + filepath);
+				throw new IOException("Cannot read " + filepath, e);
 			}
+		
+			logger.error("ArrayList<String> result is created");
+			return result;
+		}else{
+			logger.error("Filepath is empty");
+			throw new IllegalArgumentException ("Filepath is empty");
 		}
-		logger.error("ArrayList<String> result is created");
-		return result;
 	}
 	
-	public List<String> getSymptomsList(){
+	public List<String> getSymptomsList() throws IllegalArgumentException, IOException{
 		return getSymptoms();
 	}
-	public void printSymptoms(){
+	public void printSymptoms() throws IllegalArgumentException, IOException{
 		System.out.println(getSymptoms().toString());
 
 	}
