@@ -22,28 +22,28 @@ public class WriteInFile {
 		logger.error("filepath recovered");
 	}
     
-    public StringBuilder formatSymptomsList () throws IllegalArgumentException, IOException{
+    public StringBuilder formatSymptomsList () throws IOException, EmptyListException {
         StringBuilder formattedList = new StringBuilder();
         try{
-            Map<String,Integer> symptomsQuantity = this.symptomsQuantity.getSymptomsQuantity();
+            Map<String,Integer> symptomsQuantity = this.symptomsQuantity.countSymptoms();
             Set<String> symptoms = symptomsQuantity.keySet();
             formattedList.append("List of symptoms and their occurence:\n");
             for(String symptom : symptoms){
                 Integer quantity = symptomsQuantity.get(symptom);
                 formattedList.append(symptom + " : " + quantity + "\n");
             }
-        }catch (EmptyListException e){
+        }catch (IOException | EmptyListException e){
             logger.error("List is empty");
-            throw new IllegalArgumentException();
+            throw new EmptyListException();
         }
         return formattedList;
     }
-    public StringBuilder getFormattedList() throws IllegalArgumentException, IOException{
+    public StringBuilder getFormattedList() throws IOException, EmptyListException{
 		return formatSymptomsList();
 	}
     public void writeInFile (){
         try{
-            StringBuilder formattedList = getFormattedList();
+            StringBuilder formattedList = formatSymptomsList();
             BufferedWriter writer = new BufferedWriter(new FileWriter("result.out"));
             logger.error("result.out has been created");
             writer.write(formattedList.toString());
@@ -51,8 +51,8 @@ public class WriteInFile {
             logger.error("File has been written");
         } catch (IOException e){
             logger.error("Cannot write in file");
-        } catch (IllegalArgumentException e){
-            logger.error("List is empty, nothing to print");
+        } catch (EmptyListException e){
+            logger.error("List is empty, no file created");
         }
     }
 }
