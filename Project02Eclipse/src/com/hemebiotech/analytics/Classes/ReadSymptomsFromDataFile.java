@@ -11,20 +11,22 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import Interfaces.ISymptomReader;
-
 /**
- * Simple brute force implementation
+ * Obtains data from source file
+ * @see Interfaces.ISymptomReader
  */
 public class ReadSymptomsFromDataFile extends GetFilePath implements ISymptomReader {
 	private static Logger logger = LogManager.getLogger(ReadSymptomsFromDataFile.class);
-	/**
-	 * @param filepath a full or partial path to file with symptom strings in it, one per line
-	 */
+	
 	public ReadSymptomsFromDataFile (String filepath) {
 		super (filepath);
 	}
 	/**
+	 *
+	 * @param filepath a full or partial path to file with symptom strings in it, must be one per line
 	 * @return ArrayList<String> containing all symptoms read
+	 * @throw IOException if source file exist but not accessible 
+	 * 		or FileNotFoundException if source file does not exist
 	 */
 	@Override
 	public List<String> getSymptomsFromDataFile() throws IOException {
@@ -47,9 +49,21 @@ public class ReadSymptomsFromDataFile extends GetFilePath implements ISymptomRea
 		logger.error("rawSymptomsList is created");
 		return rawSymptomsList;
 	}
+	/**
+	 * Utility function, not used in main process
+	 * 
+	 * @return List<String> of raw symptoms list
+	 * @throws IOException
+	 */
     public List<String> getRawSymptomsList() throws IOException{
 		return getSymptomsFromDataFile();
 	}
+	/**
+	 * Utility function, not used in main process
+	 * 
+	 * @return Print list of raw symptoms in console
+	 * @throws IOException
+	 */
 	public void printRawSymptomsList() throws IOException{
 		try{
 			System.out.println(getSymptomsFromDataFile().toString());

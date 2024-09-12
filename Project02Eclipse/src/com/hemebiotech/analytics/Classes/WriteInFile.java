@@ -8,9 +8,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import Exceptions.EmptyListException;
-import Interfaces.IWritter;
 
-public class WriteInFile extends GetFilePath implements IWritter {
+import Interfaces.IWriter;
+/**
+ * @see Interfaces.IWriter
+ * Create a result.out text file with the formatted list of symptom and quantities
+ */
+public class WriteInFile extends GetFilePath implements IWriter {
     private static Logger logger = LogManager.getLogger(WriteInFile.class);
     private FormatList formattedList;
 
@@ -18,6 +22,13 @@ public class WriteInFile extends GetFilePath implements IWritter {
 		super (filepath);
         this.formattedList = new FormatList(this.filepath);
 	}
+	/**
+	 *
+	 * @param formattedList from FormatList class
+	 * @return void / creates file and writes in it
+	 * @exception IOException if unable to create file
+	 * @exception EmptyListException if source file not found or raw list of entry was empty
+	 */
     @Override
     public void writeInFile (){
         try{

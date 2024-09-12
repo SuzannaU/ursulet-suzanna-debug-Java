@@ -10,7 +10,10 @@ import org.apache.logging.log4j.Logger;
 
 import Exceptions.EmptyListException;
 import Interfaces.ICounter;
-
+/**
+ * @see Interfaces.ICounter
+ * Converts a raw symptoms list into a K-V of each symptoms (without doubles) and their quantities
+ */
 public class CountSymptoms extends GetFilePath implements ICounter {
 	private static Logger logger = LogManager.getLogger(CountSymptoms.class);
     private ReadSymptomsFromDataFile rawSymptomsList;
@@ -19,6 +22,13 @@ public class CountSymptoms extends GetFilePath implements ICounter {
 		super (filepath);
         this.rawSymptomsList = new ReadSymptomsFromDataFile(this.filepath);
 	}
+	/**
+	 *
+	 * @param rawSymptomsList from ReadSymptomsFromDataFile Class
+	 * @return TreeMap<String, Integer> containing all symptoms sorted alphabetically with their quantities, no doubles
+	 * @throw IOException if file not accessible or does not exist (also handles FIleNotAccessibleException)
+	 * 		EmptyListException if the raw list of entry was empty
+	 */
 	@Override
 	public Map<String, Integer> countSymptoms() throws IOException, EmptyListException {
         TreeMap<String, Integer> rawSymptomsQuantity = new TreeMap<String, Integer>();
@@ -31,7 +41,7 @@ public class CountSymptoms extends GetFilePath implements ICounter {
 				else{
 					for(String symptom : rawSymptomsList){
 						rawSymptomsQuantity.put(symptom, rawSymptomsQuantity.getOrDefault(symptom,1)+1);
-						//logger.error("symptom added");
+						//logger.error("symptom added");	//to be used as utility
 					}
 				}
 	 	} catch (IOException | EmptyListException e) {
@@ -41,9 +51,21 @@ public class CountSymptoms extends GetFilePath implements ICounter {
 		logger.error("rawSymptomsQuantity is created");
 		return rawSymptomsQuantity;
 	}
+	/**
+	 * Utility function, not used in main process
+	 * 
+	 * @return Map<String, Integer> of symptoms list and quantities
+	 * @throws IOException, EmptyListException
+	 */
     public Map<String, Integer> getRawSymptomsQuantity() throws IOException, EmptyListException{
 		return countSymptoms();
 	}
+	/**
+	 * Utility function, not used in main process
+	 * 
+	 * @return Print list of symptoms and quantity in console
+	 * @throws IOException, EmptyListException
+	 */
 	public void printRawSymptomsQuantity() throws IOException, EmptyListException{
 		try{
 			System.out.println(countSymptoms().toString());
