@@ -10,10 +10,12 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import Interfaces.ISymptomReader;
+
 /**
  * Simple brute force implementation
  */
-public class ReadSymptomsFromDataFile extends GetFilePath {
+public class ReadSymptomsFromDataFile extends GetFilePath implements ISymptomReader {
 	private static Logger logger = LogManager.getLogger(ReadSymptomsFromDataFile.class);
 	/**
 	 * @param filepath a full or partial path to file with symptom strings in it, one per line
@@ -24,6 +26,7 @@ public class ReadSymptomsFromDataFile extends GetFilePath {
 	/**
 	 * @return ArrayList<String> containing all symptoms read
 	 */
+	@Override
 	public List<String> getSymptomsFromDataFile() throws IOException {
 		ArrayList<String> rawSymptomsList = new ArrayList<String>();
 		try {
