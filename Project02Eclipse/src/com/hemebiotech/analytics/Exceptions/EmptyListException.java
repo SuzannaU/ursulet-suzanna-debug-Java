@@ -1,4 +1,5 @@
 package Exceptions;
-public class EmptyListException extends Exception {
+import java.lang.IllegalArgumentException;
+public class EmptyListException extends IllegalArgumentException {
 
 }

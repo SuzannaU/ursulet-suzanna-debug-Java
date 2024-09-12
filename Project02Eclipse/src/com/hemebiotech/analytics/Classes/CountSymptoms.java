@@ -10,35 +10,39 @@ import org.apache.logging.log4j.Logger;
 
 import Exceptions.EmptyListException;
 
-public class CountSymptoms {
+public class CountSymptoms extends GetFilePath {
 	private static Logger logger = LogManager.getLogger(CountSymptoms.class);
-    private String filepath;
-    private ReadSymptomDataFromFile result;
+    private ReadSymptomsFromDataFile rawSymptomsList;
 
     public CountSymptoms (String filepath) {
-		this.filepath = filepath;
-        this.result = new ReadSymptomDataFromFile(this.filepath);
-		logger.error("filepath recovered");
-	}
+		super (filepath);
+        this.rawSymptomsList = new ReadSymptomsFromDataFile(this.filepath);
+	}	
 	public Map<String, Integer> countSymptoms() throws IOException, EmptyListException {
-		List<String> symptomsList = result.getSymptomsFromFile();
-        TreeMap<String, Integer> symptomsQuantity = new TreeMap<String, Integer>();
-		if (symptomsList.isEmpty()){
-            logger.error("List is empty");
+        TreeMap<String, Integer> rawSymptomsQuantity = new TreeMap<String, Integer>();
+		try{			
+			List<String> rawSymptomsList = this.rawSymptomsList.getSymptomsFromDataFile();
+				if (rawSymptomsList.isEmpty()){
+					logger.error("rawSymptomsList is empty");
+					throw new EmptyListException();
+				}
+				else{
+					for(String symptom : rawSymptomsList){
+						rawSymptomsQuantity.put(symptom, rawSymptomsQuantity.getOrDefault(symptom,1)+1);
+						//logger.error("symptom added");
+					}
+				}
+	 	} catch (IOException | EmptyListException e) {
+			logger.error("rawSymptomsList is empty, rawSymptomsQuantity is not created");
 			throw new EmptyListException();
 		}
-		else{
-			for(String symptom : symptomsList){
-				symptomsQuantity.put(symptom, symptomsQuantity.getOrDefault(symptom,1)+1);
-				//logger.error("symptom added");
-			} 
-			return symptomsQuantity;
-		}
+		logger.error("rawSymptomsQuantity is created");
+		return rawSymptomsQuantity;
 	}
-    public Map<String, Integer> getRawSymptomsCount() throws IOException, EmptyListException{
+    public Map<String, Integer> getRawSymptomsQuantity() throws IOException, EmptyListException{
 		return countSymptoms();
 	}
-	public void printRawSymptomsCount() throws IOException, EmptyListException{
+	public void printRawSymptomsQuantity() throws IOException, EmptyListException{
 		try{
 			System.out.println(countSymptoms().toString());
 		}catch (IOException | EmptyListException e) {
