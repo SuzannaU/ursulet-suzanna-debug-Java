@@ -8,8 +8,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import Exceptions.EmptyListException;
+import Interfaces.IWritter;
 
-public class WriteInFile extends GetFilePath {
+public class WriteInFile extends GetFilePath implements IWritter {
     private static Logger logger = LogManager.getLogger(WriteInFile.class);
     private FormatList formattedList;
 
@@ -17,6 +18,7 @@ public class WriteInFile extends GetFilePath {
 		super (filepath);
         this.formattedList = new FormatList(this.filepath);
 	}
+    @Override
     public void writeInFile (){
         try{
             StringBuilder formattedList = this.formattedList.formatSymptomsList();

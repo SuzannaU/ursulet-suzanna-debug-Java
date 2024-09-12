@@ -9,15 +9,17 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import Exceptions.EmptyListException;
+import Interfaces.ICounter;
 
-public class CountSymptoms extends GetFilePath {
+public class CountSymptoms extends GetFilePath implements ICounter {
 	private static Logger logger = LogManager.getLogger(CountSymptoms.class);
     private ReadSymptomsFromDataFile rawSymptomsList;
 
     public CountSymptoms (String filepath) {
 		super (filepath);
         this.rawSymptomsList = new ReadSymptomsFromDataFile(this.filepath);
-	}	
+	}
+	@Override
 	public Map<String, Integer> countSymptoms() throws IOException, EmptyListException {
         TreeMap<String, Integer> rawSymptomsQuantity = new TreeMap<String, Integer>();
 		try{			

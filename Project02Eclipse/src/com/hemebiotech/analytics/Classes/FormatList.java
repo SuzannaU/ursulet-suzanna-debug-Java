@@ -8,8 +8,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import Exceptions.EmptyListException;
+import Interfaces.IFormatter;
 
-public class FormatList extends GetFilePath {
+public class FormatList extends GetFilePath implements IFormatter {
     private static Logger logger = LogManager.getLogger(FormatList.class);
     private CountSymptoms rawSymptomsQuantity;
 
@@ -17,6 +18,7 @@ public class FormatList extends GetFilePath {
 		super (filepath);
         this.rawSymptomsQuantity = new CountSymptoms(this.filepath);
 	}
+    @Override
     public StringBuilder formatSymptomsList () throws IOException, EmptyListException {
         StringBuilder formattedList = new StringBuilder();
         try{
