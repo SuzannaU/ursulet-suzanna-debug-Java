@@ -6,9 +6,9 @@ import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import Exceptions.EmptyListException;
 
+import Interfaces.IFormatter;
 import Interfaces.IWriter;
 /**
  * @see Interfaces.IWriter
@@ -16,7 +16,7 @@ import Interfaces.IWriter;
  */
 public class WriteInFile extends GetFilePath implements IWriter {
     private static Logger logger = LogManager.getLogger(WriteInFile.class);
-    private FormatList formattedList;
+    private IFormatter formattedList;
 
     public WriteInFile (String filepath) {
 		super (filepath);

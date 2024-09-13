@@ -6,8 +6,9 @@ import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import Exceptions.EmptyListException;
+
+import Interfaces.ICounter;
 import Interfaces.IFormatter;
 /**
  * @see Interfaces.IFormatter
@@ -15,7 +16,7 @@ import Interfaces.IFormatter;
  */
 public class FormatList extends GetFilePath implements IFormatter {
     private static Logger logger = LogManager.getLogger(FormatList.class);
-    private CountSymptoms rawSymptomsQuantity;
+    private ICounter rawSymptomsQuantity;
 
     public FormatList (String filepath) {
 		super (filepath);

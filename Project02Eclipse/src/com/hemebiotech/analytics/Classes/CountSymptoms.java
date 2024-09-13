@@ -7,16 +7,17 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import Exceptions.EmptyListException;
+
 import Interfaces.ICounter;
+import Interfaces.ISymptomReader;
 /**
  * @see Interfaces.ICounter
  * Converts a raw symptoms list into a K-V of each symptoms (without doubles) and their quantities
  */
 public class CountSymptoms extends GetFilePath implements ICounter {
 	private static Logger logger = LogManager.getLogger(CountSymptoms.class);
-    private ReadSymptomsFromDataFile rawSymptomsList;
+    private ISymptomReader rawSymptomsList;
 
     public CountSymptoms (String filepath) {
 		super (filepath);
