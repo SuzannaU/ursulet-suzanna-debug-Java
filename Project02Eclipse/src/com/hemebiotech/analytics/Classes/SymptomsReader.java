@@ -11,63 +11,70 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import Interfaces.IReader;
+
 /**
  * Obtains data from source file
+ * 
  * @see Interfaces.ISymptomReader
  */
-public class SymptomsReader extends GetFilePath implements IReader {
+public class SymptomsReader implements IReader {
 	private static Logger logger = LogManager.getLogger(SymptomsReader.class);
-	
-	public SymptomsReader (String filepath) {
-		super (filepath);
-	}
+	private String sourceFilePath;
+
 	/**
 	 *
-	 * @param filepath a full or partial path to file with symptom strings in it, must be one per line
+	 * @param filepath a full or partial path to file with symptom strings in it,
+	 *                 must be one per line
 	 * @return ArrayList<String> containing all symptoms read
-	 * @throw IOException if source file exist but not accessible 
-	 * 		or FileNotFoundException if source file does not exist
+	 * @throw IOException if source file exist but not accessible
+	 *        or FileNotFoundException if source file does not exist
 	 */
+	public SymptomsReader(String sourceFilePath) {
+		this.sourceFilePath = sourceFilePath;
+	}
+
 	@Override
 	public List<String> read() throws IOException {
 		ArrayList<String> rawList = new ArrayList<String>();
 		try {
-			BufferedReader reader = new BufferedReader (new FileReader(filepath));
-			String line = reader.readLine();				
+			BufferedReader reader = new BufferedReader(new FileReader(sourceFilePath));
+			String line = reader.readLine();
 			while (line != null) {
 				rawList.add(line);
 				line = reader.readLine();
 			}
 			reader.close();
 		} catch (FileNotFoundException e) {
-			logger.error(filepath + " cannot be found.");
+			logger.error(sourceFilePath + " cannot be found.");
 			throw new FileNotFoundException();
 		} catch (IOException e) {
-			logger.error("Cannot read " + filepath);
+			logger.error("Cannot read " + sourceFilePath);
 			throw new IOException();
-		}		
+		}
 		logger.error("rawSymptomsList is created");
 		return rawList;
 	}
+
 	/**
 	 * Utility function, not used in main process
 	 * 
 	 * @return List<String> of raw symptoms list
 	 * @throws IOException
 	 */
-    public List<String> getRawSymptomsList() throws IOException{
+	public List<String> getRawSymptomsList() throws IOException {
 		return read();
 	}
+
 	/**
 	 * Utility function, not used in main process
 	 * 
 	 * @return Print list of raw symptoms in console
 	 * @throws IOException
 	 */
-	public void printRawSymptomsList() throws IOException{
-		try{
+	public void printRawSymptomsList() throws IOException {
+		try {
 			System.out.println(read().toString());
-		}catch (IOException e) {
+		} catch (IOException e) {
 			logger.error("Cannot print any symptoms");
 		}
 	}
