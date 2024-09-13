@@ -7,5 +7,5 @@ import java.io.IOException;
  * 
  */
 public interface IReader {
-	List<String> reader() throws IOException ;
+	List<String> read() throws IOException ;
 }

@@ -29,7 +29,7 @@ public class SymptomsReader extends GetFilePath implements IReader {
 	 * 		or FileNotFoundException if source file does not exist
 	 */
 	@Override
-	public List<String> reader() throws IOException {
+	public List<String> read() throws IOException {
 		ArrayList<String> rawList = new ArrayList<String>();
 		try {
 			BufferedReader reader = new BufferedReader (new FileReader(filepath));
@@ -56,7 +56,7 @@ public class SymptomsReader extends GetFilePath implements IReader {
 	 * @throws IOException
 	 */
     public List<String> getRawSymptomsList() throws IOException{
-		return reader();
+		return read();
 	}
 	/**
 	 * Utility function, not used in main process
@@ -66,7 +66,7 @@ public class SymptomsReader extends GetFilePath implements IReader {
 	 */
 	public void printRawSymptomsList() throws IOException{
 		try{
-			System.out.println(reader().toString());
+			System.out.println(read().toString());
 		}catch (IOException e) {
 			logger.error("Cannot print any symptoms");
 		}

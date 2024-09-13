@@ -30,9 +30,9 @@ public class SymptomsWriter extends GetFilePath implements IWriter {
 	 * @exception EmptyListException if source file not found or raw list of entry was empty
 	 */
     @Override
-    public void writer() {
+    public void write() {
         try{
-            StringBuilder formattedList = this.formattedList.formatter();
+            StringBuilder formattedList = this.formattedList.format();
             BufferedWriter writer = new BufferedWriter(new FileWriter("result.out"));
             logger.error("result.out is created");
             writer.write(formattedList.toString());

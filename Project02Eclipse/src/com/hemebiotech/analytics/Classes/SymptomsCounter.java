@@ -31,10 +31,10 @@ public class SymptomsCounter extends GetFilePath implements ICounter {
 	 * 		EmptyListException if the raw list of entry was empty
 	 */
 	@Override
-	public Map<String, Integer> counter() throws IOException, EmptyListException {
+	public Map<String, Integer> count() throws IOException, EmptyListException {
         TreeMap<String, Integer> rawSymptomsQuantity = new TreeMap<String, Integer>();
 		try{			
-			List<String> rawList = this.rawList.reader();
+			List<String> rawList = this.rawList.read();
 				if (rawList.isEmpty()){
 					logger.error("rawSymptomsList is empty");
 					throw new EmptyListException();
@@ -59,7 +59,7 @@ public class SymptomsCounter extends GetFilePath implements ICounter {
 	 * @throws IOException, EmptyListException
 	 */
     public Map<String, Integer> getRawSymptomsQuantity() throws IOException, EmptyListException{
-		return counter();
+		return count();
 	}
 	/**
 	 * Utility function, not used in main process
@@ -69,7 +69,7 @@ public class SymptomsCounter extends GetFilePath implements ICounter {
 	 */
 	public void printRawSymptomsQuantity() throws IOException, EmptyListException{
 		try{
-			System.out.println(counter().toString());
+			System.out.println(count().toString());
 		}catch (IOException | EmptyListException e) {
 			logger.error("Cannot print any symptoms");
 		}

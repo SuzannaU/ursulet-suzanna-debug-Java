@@ -30,10 +30,10 @@ public class SymptomsFormatter extends GetFilePath implements IFormatter {
 	 * 		EmptyListException if the raw list of entry was empty
 	 */
     @Override
-    public StringBuilder formatter () throws IOException, EmptyListException {
+    public StringBuilder format () throws IOException, EmptyListException {
         StringBuilder formattedList = new StringBuilder();
         try{
-            Map<String,Integer> rawSymptomsQuantity = this.rawSymptomsQuantity.counter();
+            Map<String,Integer> rawSymptomsQuantity = this.rawSymptomsQuantity.count();
             Set<String> symptoms = rawSymptomsQuantity.keySet();
             formattedList.append("List of symptoms and their occurence:\n");
             for(String symptom : symptoms){
@@ -55,7 +55,7 @@ public class SymptomsFormatter extends GetFilePath implements IFormatter {
 	 * @throws IOException, EmptyListException
 	 */
     public StringBuilder getFormattedList() throws IOException, EmptyListException{
-        return formatter();
+        return format();
 	}
 	/**
 	 * Utility function, not used in main process
@@ -65,7 +65,7 @@ public class SymptomsFormatter extends GetFilePath implements IFormatter {
 	 */
 	public void printFormattedList() throws IOException, EmptyListException{
 		try{
-			System.out.println(formatter().toString());
+			System.out.println(format().toString());
 		}catch (IOException | EmptyListException e) {
 			logger.error("Cannot print any symptoms");
 		}

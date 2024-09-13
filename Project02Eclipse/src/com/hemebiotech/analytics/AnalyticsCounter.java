@@ -20,7 +20,7 @@ public class AnalyticsCounter {
 	 */
 	public static void main(String args[]) throws IOException, EmptyListException{
 		IWriter writer = new SymptomsWriter("symptoms.txt");
-		writer.writer();
+		writer.write();
 	}
 	
 /* 		What it should look like:
