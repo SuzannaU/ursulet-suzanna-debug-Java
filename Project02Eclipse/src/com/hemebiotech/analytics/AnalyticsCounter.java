@@ -1,5 +1,8 @@
+import java.io.IOException;
+
 import Classes.*;
-import Interfaces.IWriter;
+import Exceptions.EmptyListException;
+import Interfaces.*;
 /**
  * Main Class, where process is executed
  */
@@ -11,10 +14,19 @@ public class AnalyticsCounter {
 	 * 
 	 * Call writeInFile() method from that object
 	 * @return create result.out file with symptoms list and quantity
+	 * @throws IOException 
+	 * @throws EmptyListException 
 	 * 
 	 */
-	public static void main(String args[]){
-		IWriter file = new WriteInFile("symptoms.txt");
-		file.writeInFile();
+	public static void main(String args[]) throws IOException, EmptyListException{
+		IWriter writer = new SymptomsWriter("symptoms.txt");
+		writer.writer();
 	}
+	
+/* 		What it should look like:
+
+		IReader reader = new SymptomsReader("symptoms.txt");
+		ICounter counter = new SymptomsCounter(reader.reader(););
+		IWriter writer = new SymptomsWriter(counter.counter(););
+		 */
 }

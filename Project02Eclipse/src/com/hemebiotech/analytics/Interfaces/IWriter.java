@@ -4,5 +4,5 @@ package Interfaces;
  * sorted alphabetically, without doubles
  */
 public interface IWriter {
-    public void writeInFile ();
+    public void writer();
 }

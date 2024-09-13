@@ -10,15 +10,15 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import Interfaces.ISymptomReader;
+import Interfaces.IReader;
 /**
  * Obtains data from source file
  * @see Interfaces.ISymptomReader
  */
-public class ReadSymptomsFromDataFile extends GetFilePath implements ISymptomReader {
-	private static Logger logger = LogManager.getLogger(ReadSymptomsFromDataFile.class);
+public class SymptomsReader extends GetFilePath implements IReader {
+	private static Logger logger = LogManager.getLogger(SymptomsReader.class);
 	
-	public ReadSymptomsFromDataFile (String filepath) {
+	public SymptomsReader (String filepath) {
 		super (filepath);
 	}
 	/**
@@ -29,13 +29,13 @@ public class ReadSymptomsFromDataFile extends GetFilePath implements ISymptomRea
 	 * 		or FileNotFoundException if source file does not exist
 	 */
 	@Override
-	public List<String> getSymptomsFromDataFile() throws IOException {
-		ArrayList<String> rawSymptomsList = new ArrayList<String>();
+	public List<String> reader() throws IOException {
+		ArrayList<String> rawList = new ArrayList<String>();
 		try {
 			BufferedReader reader = new BufferedReader (new FileReader(filepath));
 			String line = reader.readLine();				
 			while (line != null) {
-				rawSymptomsList.add(line);
+				rawList.add(line);
 				line = reader.readLine();
 			}
 			reader.close();
@@ -47,7 +47,7 @@ public class ReadSymptomsFromDataFile extends GetFilePath implements ISymptomRea
 			throw new IOException();
 		}		
 		logger.error("rawSymptomsList is created");
-		return rawSymptomsList;
+		return rawList;
 	}
 	/**
 	 * Utility function, not used in main process
@@ -56,7 +56,7 @@ public class ReadSymptomsFromDataFile extends GetFilePath implements ISymptomRea
 	 * @throws IOException
 	 */
     public List<String> getRawSymptomsList() throws IOException{
-		return getSymptomsFromDataFile();
+		return reader();
 	}
 	/**
 	 * Utility function, not used in main process
@@ -66,7 +66,7 @@ public class ReadSymptomsFromDataFile extends GetFilePath implements ISymptomRea
 	 */
 	public void printRawSymptomsList() throws IOException{
 		try{
-			System.out.println(getSymptomsFromDataFile().toString());
+			System.out.println(reader().toString());
 		}catch (IOException e) {
 			logger.error("Cannot print any symptoms");
 		}

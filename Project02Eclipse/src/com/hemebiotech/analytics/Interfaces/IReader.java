@@ -6,6 +6,6 @@ import java.io.IOException;
  * Data must be one per line
  * 
  */
-public interface ISymptomReader {
-	List<String> getSymptomsFromDataFile() throws IOException ;
+public interface IReader {
+	List<String> reader() throws IOException ;
 }

@@ -14,13 +14,13 @@ import Interfaces.IWriter;
  * @see Interfaces.IWriter
  * Create a result.out text file with the formatted list of symptom and quantities
  */
-public class WriteInFile extends GetFilePath implements IWriter {
-    private static Logger logger = LogManager.getLogger(WriteInFile.class);
+public class SymptomsWriter extends GetFilePath implements IWriter {
+    private static Logger logger = LogManager.getLogger(SymptomsWriter.class);
     private IFormatter formattedList;
 
-    public WriteInFile (String filepath) {
+    public SymptomsWriter (String filepath) {
 		super (filepath);
-        this.formattedList = new FormatList(this.filepath);
+        this.formattedList = new SymptomsFormatter(this.filepath);
 	}
 	/**
 	 *
@@ -30,9 +30,9 @@ public class WriteInFile extends GetFilePath implements IWriter {
 	 * @exception EmptyListException if source file not found or raw list of entry was empty
 	 */
     @Override
-    public void writeInFile (){
+    public void writer() {
         try{
-            StringBuilder formattedList = this.formattedList.formatSymptomsList();
+            StringBuilder formattedList = this.formattedList.formatter();
             BufferedWriter writer = new BufferedWriter(new FileWriter("result.out"));
             logger.error("result.out is created");
             writer.write(formattedList.toString());

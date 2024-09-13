@@ -10,37 +10,37 @@ import org.apache.logging.log4j.Logger;
 import Exceptions.EmptyListException;
 
 import Interfaces.ICounter;
-import Interfaces.ISymptomReader;
+import Interfaces.IReader;
 /**
  * @see Interfaces.ICounter
  * Converts a raw symptoms list into a K-V of each symptoms (without doubles) and their quantities
  */
-public class CountSymptoms extends GetFilePath implements ICounter {
-	private static Logger logger = LogManager.getLogger(CountSymptoms.class);
-    private ISymptomReader rawSymptomsList;
+public class SymptomsCounter extends GetFilePath implements ICounter {
+	private static Logger logger = LogManager.getLogger(SymptomsCounter.class);
+    private IReader rawList;
 
-    public CountSymptoms (String filepath) {
+    public SymptomsCounter (String filepath) {
 		super (filepath);
-        this.rawSymptomsList = new ReadSymptomsFromDataFile(this.filepath);
+        this.rawList = new SymptomsReader(this.filepath);
 	}
 	/**
 	 *
-	 * @param rawSymptomsList from ReadSymptomsFromDataFile Class
+	 * @param rawList from ReadSymptomsFromDataFile Class
 	 * @return TreeMap<String, Integer> containing all symptoms sorted alphabetically with their quantities, no doubles
 	 * @throw IOException if file not accessible or does not exist (also handles FIleNotAccessibleException)
 	 * 		EmptyListException if the raw list of entry was empty
 	 */
 	@Override
-	public Map<String, Integer> countSymptoms() throws IOException, EmptyListException {
+	public Map<String, Integer> counter() throws IOException, EmptyListException {
         TreeMap<String, Integer> rawSymptomsQuantity = new TreeMap<String, Integer>();
 		try{			
-			List<String> rawSymptomsList = this.rawSymptomsList.getSymptomsFromDataFile();
-				if (rawSymptomsList.isEmpty()){
+			List<String> rawList = this.rawList.reader();
+				if (rawList.isEmpty()){
 					logger.error("rawSymptomsList is empty");
 					throw new EmptyListException();
 				}
 				else{
-					for(String symptom : rawSymptomsList){
+					for(String symptom : rawList){
 						rawSymptomsQuantity.put(symptom, rawSymptomsQuantity.getOrDefault(symptom,1)+1);
 						//logger.error("symptom added");	//to be used as utility
 					}
@@ -59,7 +59,7 @@ public class CountSymptoms extends GetFilePath implements ICounter {
 	 * @throws IOException, EmptyListException
 	 */
     public Map<String, Integer> getRawSymptomsQuantity() throws IOException, EmptyListException{
-		return countSymptoms();
+		return counter();
 	}
 	/**
 	 * Utility function, not used in main process
@@ -69,7 +69,7 @@ public class CountSymptoms extends GetFilePath implements ICounter {
 	 */
 	public void printRawSymptomsQuantity() throws IOException, EmptyListException{
 		try{
-			System.out.println(countSymptoms().toString());
+			System.out.println(counter().toString());
 		}catch (IOException | EmptyListException e) {
 			logger.error("Cannot print any symptoms");
 		}
