@@ -6,34 +6,30 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import Classes.*;
-import Interfaces.*;
+import classes.*;
+import interfaces.*;
 
-/**
- * Main Class, where process is executed
- */
 public class AnalyticsCounter {
 	private static Logger logger = LogManager.getLogger(AnalyticsCounter.class);
 
 	/**
 	 * 
-	 * @param sourceFilePath of source file as String
+	 * Reads source file and creates List of items
+	 * Counts items and generates Map of Items/Quantities
+	 * Formats and writes results in output file
 	 * 
-	 *                       Call writeInFile() method from that object
-	 * @return create result.out file with symptoms list and quantity
-	 * @throws IOException
+	 * @throws IOException if source file not found or not accessible
 	 * 
 	 */
 	public static void main(String args[]) throws IOException {
 		try {
-			IReader reader = new SymptomsReader("symptoms.txt");
+			IReader reader = new SourceFileReader("symptoms.txt");
 			List<String> list = new ArrayList<String>(reader.read());
-			ICounter counter = new SymptomsCounter(list);
-			IFormatter formatter = new SymptomsFormatter(counter);
-			IWriter writer = new SymptomsWriter(formatter);
+			ICounter counter = new ListCounter(list);
+			IWriter writer = new OutputFileWriter(counter);
 			writer.write("result.out");
 		} catch (FileNotFoundException e) {
-			logger.error("Source file cannot be found.");
+			logger.error("Source file is not accessible.");
 		}
 	}
 }

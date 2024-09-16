@@ -1,9 +1,8 @@
-package Interfaces;
+package interfaces;
 
 /**
- * Creates a result.out file with one 'symptom: quantity' per line
- * sorted alphabetically, without doubles
+ * Creates output file and writes in it
  */
 public interface IWriter {
-    public void write(String resultFilePath);
+    public void write(String outputFileName);
 }

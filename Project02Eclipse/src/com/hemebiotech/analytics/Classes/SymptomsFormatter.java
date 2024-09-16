@@ -1,41 +1,33 @@
-package Classes;
+package classes;
 
 import java.io.IOException;
 import java.util.Set;
 import java.util.Map;
 
-import Exceptions.EmptyListException;
-/**
- * @see Interfaces.IFormatter
- * Formats a K-V of symptoms and their quantities into a StringBuilder of one 'symptom: quantity' per line
- */
-import Interfaces.*;
+import exceptions.EmptyListException;
+import interfaces.*;
 
 public class SymptomsFormatter implements IFormatter {
-    private ICounter rawSymptomsQuantity;
-
-    public SymptomsFormatter(ICounter rawSymptomsQuantity) {
-        this.rawSymptomsQuantity = rawSymptomsQuantity;
-    }
-
     /**
+     * Formats a Map of symptoms/quantities into a StringBuilder ready to be written
      *
-     * @param rawSymptomsQuantity from CountSymptoms Class
+     * @param ICounter typed object
      * @return StringBuilder with one 'symtpom: quantity' per line
-     * @throws EmptyListException
-     * @throw IOException if source file not accessible or does not exist
-     *        EmptyListException if the raw list of entry was empty
+     * @throws EmptyListException EmptyListException if the raw list of entry was
+     *                            empty
+     * @throws IOException        if source file not accessible or does not exist
+     *                            EmptyListException if the raw list of entry was
+     *                            empty
      */
     @Override
-    public StringBuilder format() throws IOException, EmptyListException {
+    public StringBuilder format(ICounter counter) throws IOException, EmptyListException {
         StringBuilder formattedList = new StringBuilder();
-        Map<String, Integer> map = this.rawSymptomsQuantity.count();
-        Set<String> symptoms = map.keySet();
+        Map<String, Integer> map = counter.count();
+        Set<String> items = map.keySet();
         formattedList.append("List of symptoms and their occurence:\n");
-        for (String symptom : symptoms) {
-            Integer quantity = map.get(symptom);
-            formattedList.append(symptom + ": " + quantity + "\n");
-            // logger.error("symptom appended"); //to be used as utility
+        for (String item : items) {
+            Integer quantity = map.get(item);
+            formattedList.append(item + ": " + quantity + "\n");
         }
         return formattedList;
     }

@@ -1,12 +1,11 @@
-package Interfaces;
+package interfaces;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
-import Exceptions.EmptyListException;
+import exceptions.EmptyListException;
 
 /**
- * Counts symptoms and gets rid of doubles
+ * Counts items from List
  */
 public interface ICounter {
     public Map<String, Integer> count() throws IOException, EmptyListException;

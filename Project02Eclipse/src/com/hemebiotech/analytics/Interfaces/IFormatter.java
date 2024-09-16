@@ -1,13 +1,12 @@
-package Interfaces;
+package interfaces;
 
 import java.io.IOException;
-import java.util.TreeMap;
 
-import Exceptions.EmptyListException;
+import exceptions.EmptyListException;
 
 /**
- * formats the raw list of symptoms: quantity to one per line
+ * Formats list generated with ICounter
  */
 public interface IFormatter {
-    public StringBuilder format() throws IOException, EmptyListException;
+    public StringBuilder format(ICounter counter) throws IOException, EmptyListException;
 }

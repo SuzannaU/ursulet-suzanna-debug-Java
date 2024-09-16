@@ -1,13 +1,12 @@
-package Interfaces;
+package interfaces;
 
-import java.util.List;
 import java.io.IOException;
+import java.util.List;
 
 /**
- * Obtains data from a file
- * Data must be one per line
+ * Reads data and returns a List<String>
  * 
  */
 public interface IReader {
-	List<String> read() throws IOException;
+	public List<String> read() throws IOException;
 }
