@@ -4,7 +4,6 @@ import java.util.TreeMap;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import exceptions.EmptyListException;
@@ -25,10 +24,11 @@ public class ListCounter implements ICounter {
 
 	/**
 	 *
-	 * @param rawList from constructor parameter
+	 * @param rawList from constructor attribute
 	 * @return TreeMap<String, Integer> containing all symptoms sorted
 	 *         alphabetically with their quantities, no doubles
-	 * @throws IOException        if file not accessible or does not exist (also handles
+	 * @throws IOException        if file not accessible or does not exist (also
+	 *                            handles
 	 *                            FIleNotAccessibleException)
 	 * @throws EmptyListException if the raw list of entry is empty
 	 */
@@ -36,7 +36,7 @@ public class ListCounter implements ICounter {
 	public Map<String, Integer> count() throws IOException, EmptyListException {
 		TreeMap<String, Integer> rawQuantities = new TreeMap<String, Integer>();
 		try {
-			List<String> list = this.rawList;
+			List<String> list = rawList;
 			if (list.isEmpty()) {
 				throw new EmptyListException();
 			} else {
