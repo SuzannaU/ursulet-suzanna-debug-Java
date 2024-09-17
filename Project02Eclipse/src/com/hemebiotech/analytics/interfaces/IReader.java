@@ -1,4 +1,4 @@
-package interface2;
+package interfaces;
 
 import java.io.IOException;
 import java.util.List;

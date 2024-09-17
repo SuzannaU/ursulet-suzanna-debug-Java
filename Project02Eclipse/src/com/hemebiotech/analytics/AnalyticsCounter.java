@@ -6,9 +6,9 @@ import java.util.Map;
 import java.util.TreeMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import classe.*;
-import exception.EmptyListException;
-import interface2.*;
+import classes.*;
+import interfaces.*;
+import exceptions.EmptyListException;
 
 public class AnalyticsCounter {
 	private static Logger logger = LogManager.getLogger(AnalyticsCounter.class);

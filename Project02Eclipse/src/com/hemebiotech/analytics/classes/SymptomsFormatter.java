@@ -1,10 +1,11 @@
-package classe;
+package classes;
 
 import java.io.IOException;
 import java.util.Set;
-import exception.EmptyListException;
 import java.util.Map;
-import interface2.*;
+import exceptions.EmptyListException;
+import interfaces.*;
+
 
 public class SymptomsFormatter implements IFormatter {
 	private Map<String, Integer> rawQuantities;

@@ -1,4 +1,4 @@
-package classe;
+package classes;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import exception.EmptyListException;
-import interface2.*;
+import exceptions.EmptyListException;
+import interfaces.*;
 
 /**
  * @see interfaces.IWriter

@@ -1,4 +1,4 @@
-package interface2;
+package interfaces;
 
 /**
  * Creates output file and writes in it
