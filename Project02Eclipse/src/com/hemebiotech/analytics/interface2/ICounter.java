@@ -1,8 +1,9 @@
-package interfaces;
+package interface2;
 
 import java.io.IOException;
 import java.util.Map;
-import exceptions.EmptyListException;
+
+import exception.EmptyListException;
 
 /**
  * Counts items from List and puts them in a Map

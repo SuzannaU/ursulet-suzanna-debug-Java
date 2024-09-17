@@ -1,4 +1,4 @@
-package classes;
+package classe;
 
 import java.util.TreeMap;
 import java.io.IOException;
@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import exceptions.EmptyListException;
-import interfaces.*;
+import exception.EmptyListException;
+import interface2.*;
 
 /**
  * @see interfaces.ICounter

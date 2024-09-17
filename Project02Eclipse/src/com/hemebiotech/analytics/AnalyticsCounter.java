@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import classes.*;
-import exceptions.EmptyListException;
-import interfaces.*;
+import classe.*;
+import exception.EmptyListException;
+import interface2.*;
 
 public class AnalyticsCounter {
 	private static Logger logger = LogManager.getLogger(AnalyticsCounter.class);

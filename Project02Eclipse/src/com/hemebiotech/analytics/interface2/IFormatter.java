@@ -1,7 +1,8 @@
-package interfaces;
+package interface2;
 
 import java.io.IOException;
-import exceptions.EmptyListException;
+
+import exception.EmptyListException;
 
 /**
  * Formats into a StringBuilder

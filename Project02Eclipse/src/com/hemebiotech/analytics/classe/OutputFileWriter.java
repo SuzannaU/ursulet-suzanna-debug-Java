@@ -1,4 +1,4 @@
-package classes;
+package classe;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -6,9 +6,8 @@ import java.io.IOException;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import exceptions.EmptyListException;
-import interfaces.IFormatter;
-import interfaces.IWriter;
+import exception.EmptyListException;
+import interface2.*;
 
 /**
  * @see interfaces.IWriter
@@ -20,7 +19,7 @@ import interfaces.IWriter;
  *
  */
 public class OutputFileWriter implements IWriter {
-    private static Logger logger = LogManager.getLogger(classes.OutputFileWriter.class);
+    private static Logger logger = LogManager.getLogger(OutputFileWriter.class);
     private Map<String, Integer> rawQuantities;
 
     public OutputFileWriter(Map<String, Integer> rawQuantities) {

@@ -1,4 +1,4 @@
-package classes;
+package classe;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import interfaces.IReader;
+import interface2.*;
 
 /**
  * Obtains data from source file
