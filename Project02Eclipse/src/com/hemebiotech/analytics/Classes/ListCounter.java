@@ -28,19 +28,17 @@ public class ListCounter implements ICounter {
 	 * @return TreeMap<String, Integer> containing all symptoms sorted
 	 *         alphabetically with their quantities, no doubles
 	 * @throws IOException        if file not accessible or does not exist (also
-	 *                            handles
-	 *                            FIleNotAccessibleException)
+	 *                            handles FIleNotAccessibleException)
 	 * @throws EmptyListException if the raw list of entry is empty
 	 */
 	@Override
 	public Map<String, Integer> count() throws IOException, EmptyListException {
 		TreeMap<String, Integer> rawQuantities = new TreeMap<String, Integer>();
 		try {
-			List<String> list = rawList;
-			if (list.isEmpty()) {
+			if (rawList.isEmpty()) {
 				throw new EmptyListException();
 			} else {
-				for (String item : list) {
+				for (String item : rawList) {
 					rawQuantities.put(item, rawQuantities.getOrDefault(item, 1) + 1);
 				}
 			}

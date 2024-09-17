@@ -15,6 +15,8 @@ public class SymptomsFormatter implements IFormatter {
 
     /**
      * Formats a Map of symptoms/quantities into a StringBuilder ready to be written
+     * 
+     * @see classes.OutputFileWriter where method is called
      *
      * @param  Map<String, Integer> from constructor attribute
      * @return StringBuilder with one 'symtpom: quantity' per line
@@ -27,11 +29,10 @@ public class SymptomsFormatter implements IFormatter {
     @Override
     public StringBuilder format() throws IOException, EmptyListException {
         StringBuilder formattedList = new StringBuilder();
-        Map<String, Integer> map = rawQuantities;
-        Set<String> items = map.keySet();
+        Set<String> items = rawQuantities.keySet();
         formattedList.append("List of symptoms and their occurence:\n");
         for (String item : items) {
-            Integer quantity = map.get(item);
+            Integer quantity = rawQuantities.get(item);
             formattedList.append(item + ": " + quantity + "\n");
         }
         return formattedList;

@@ -12,11 +12,15 @@ import interfaces.IWriter;
 
 /**
  * @see interfaces.IWriter
- *      formats then writes results in output file
+ * 
+ * Formats then writes results in output file
+ * 
+ * Calls format method
+ * @see classes.SymptomsFormatter 
  *
  */
 public class OutputFileWriter implements IWriter {
-    private static Logger logger = LogManager.getLogger(OutputFileWriter.class);
+    private static Logger logger = LogManager.getLogger(classes.OutputFileWriter.class);
     private Map<String, Integer> rawQuantities;
 
     public OutputFileWriter(Map<String, Integer> rawQuantities) {
