@@ -7,5 +7,5 @@ import java.util.List;
  * Reads data and returns a List<String>
  */
 public interface IReader {
-	public List<String> read() throws IOException;
+	public List<String> read(String sourceFilePath) throws IOException;
 }

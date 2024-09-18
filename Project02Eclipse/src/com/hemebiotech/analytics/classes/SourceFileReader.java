@@ -17,11 +17,7 @@ import interfaces.*;
  */
 public class SourceFileReader implements IReader {
 	private static Logger logger = LogManager.getLogger(SourceFileReader.class);
-	private String sourceFilePath;
-
-	public SourceFileReader(String sourceFilePath) {
-		this.sourceFilePath = sourceFilePath;
-	}
+	private ArrayList<String> rawList = new ArrayList<String>();
 
 	/**
 	 * @param sourceFilePath a full or partial path to file with items in it,
@@ -30,9 +26,7 @@ public class SourceFileReader implements IReader {
 	 * @throws IOException           if source file exists but not accessible
 	 * @throws FileNotFoundException if source file does not exist
 	 */
-	@Override
-	public List<String> read() throws IOException {
-		ArrayList<String> rawList = new ArrayList<String>();
+	public List<String> read(String sourceFilePath) throws IOException {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(sourceFilePath));
 			String line = reader.readLine();

@@ -10,13 +10,14 @@ import exceptions.EmptyListException;
 import interfaces.*;
 
 /**
+ * Converts a raw list of items into a Map of each item and its quantity
+ * 
  * @see interfaces.ICounter
- *      Converts a raw list of items into a Map of each item and their
- *      quantities
  */
 public class ListCounter implements ICounter {
 	private static Logger logger = LogManager.getLogger(ListCounter.class);
 	private List<String> rawList;
+	private TreeMap<String, Integer> rawQuantities = new TreeMap<String, Integer>();
 
 	public ListCounter(List<String> rawList) {
 		this.rawList = rawList;
@@ -31,9 +32,7 @@ public class ListCounter implements ICounter {
 	 *                            handles FIleNotAccessibleException)
 	 * @throws EmptyListException if the raw list of entry is empty
 	 */
-	@Override
 	public Map<String, Integer> count() throws IOException, EmptyListException {
-		TreeMap<String, Integer> rawQuantities = new TreeMap<String, Integer>();
 		try {
 			if (rawList.isEmpty()) {
 				throw new EmptyListException();

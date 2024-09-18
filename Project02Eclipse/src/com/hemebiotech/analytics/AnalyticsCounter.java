@@ -17,19 +17,22 @@ public class AnalyticsCounter {
 	 * 
 	 * Reads source file and creates List of items
 	 * Counts items and generates Map of Items/Quantities
-	 * Formats and writes results in output file
+	 * Formats into a symptoms String
+	 * Writes result in output file
 	 * 
-	 * @throws IOException if source file not found or not accessible
-	 * @throws EmptyListException 
+	 * @throws IOException        if source file not found or not accessible
+	 * @throws EmptyListException if list is empty
 	 * 
 	 */
 	public static void main(String args[]) throws IOException, EmptyListException {
 		try {
-			IReader reader = new SourceFileReader("symptoms.txt");
-			List<String> list = new ArrayList<String>(reader.read());
-			ICounter counter = new ListCounter(list);
-			Map<String, Integer> map = new TreeMap<String,Integer>(counter.count());
-			IWriter writer = new OutputFileWriter(map);
+			IReader reader = new SourceFileReader();
+			List<String> listOfSymptoms = new ArrayList<String>(reader.read("symptoms.txt"));
+			ICounter counter = new ListCounter(listOfSymptoms);
+			Map<String, Integer> mapOfSymptomsQuantities = new TreeMap<String, Integer>(counter.count());
+			IFormatter formatter = new SymptomsFormatter(mapOfSymptomsQuantities);
+			StringBuilder formattedList = new StringBuilder(formatter.formatSymptoms());
+			IWriter writer = new OutputFileWriter(formattedList);
 			writer.write("result.out");
 		} catch (FileNotFoundException e) {
 			logger.error("Source file is not accessible.");

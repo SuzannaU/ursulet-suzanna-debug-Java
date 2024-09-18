@@ -3,43 +3,22 @@ package classes;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import exceptions.EmptyListException;
-import interfaces.*;
+import interfaces.IWriter;
 
 /**
+ * Writes results in output file
+ * 
  * @see interfaces.IWriter
- * 
- * Formats then writes results in output file
- * 
- * Calls format method
- * @see classes.SymptomsFormatter 
- *
  */
 public class OutputFileWriter implements IWriter {
     private static Logger logger = LogManager.getLogger(OutputFileWriter.class);
-    private Map<String, Integer> rawQuantities;
+    private StringBuilder formattedList;
 
-    public OutputFileWriter(Map<String, Integer> rawQuantities) {
-        this.rawQuantities = rawQuantities;
-    }
-
-    /**
-     * Calls format method 
-     * @see classes.SymptomsFormatter
-     * 
-     * @param Map<String, Integer> from constructor attribute
-     * @return StringBuilder to be written
-     * @throws IOException
-     * @throws EmptyListException
-     */
-    public StringBuilder format(Map<String, Integer> rawQuantities) throws IOException, EmptyListException {
-        StringBuilder formattedList = new StringBuilder();
-        IFormatter formatter = new SymptomsFormatter(this.rawQuantities);
-        formattedList = formatter.format();
-        return formattedList;
+    public OutputFileWriter(StringBuilder formattedList) {
+        this.formattedList = formattedList;
     }
 
     /**
@@ -50,19 +29,15 @@ public class OutputFileWriter implements IWriter {
      *                            empty
      * @throws IOException        if output file cannot be written
      */
-    @Override
     public void write(String outputFileName) {
         try {
-            StringBuilder stringBuilder = format(this.rawQuantities);
             BufferedWriter writer = new BufferedWriter(new FileWriter(outputFileName));
             logger.info("result.out is created");
-            writer.write(stringBuilder.toString());
+            writer.write(formattedList.toString());
             writer.close();
             logger.info("File has been written");
         } catch (IOException e) {
             logger.error("Cannot write in file");
-        } catch (EmptyListException e3) {
-            logger.error("List empty, nothing to write");
         }
     }
 }

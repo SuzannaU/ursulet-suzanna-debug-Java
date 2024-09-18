@@ -7,5 +7,5 @@ import exceptions.EmptyListException;
  * Formats into a StringBuilder
  */
 public interface IFormatter {
-    public StringBuilder format() throws IOException, EmptyListException;
+    public StringBuilder formatSymptoms() throws IOException, EmptyListException;
 }

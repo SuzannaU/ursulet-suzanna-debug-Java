@@ -4,22 +4,25 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.Map;
 import exceptions.EmptyListException;
-import interfaces.*;
+import interfaces.IFormatter;
 
-
+/**
+ * Formats a Map into a writable StringBuilder
+ * 
+ * @see interfaces.IReader
+ */
 public class SymptomsFormatter implements IFormatter {
-	private Map<String, Integer> rawQuantities;
+    private Map<String, Integer> rawQuantities;
+    private StringBuilder formattedList = new StringBuilder();
 
-	public SymptomsFormatter(Map<String, Integer> rawQuantities) {
-		this.rawQuantities = rawQuantities;
-	}
+    public SymptomsFormatter(Map<String, Integer> rawQuantities) {
+        this.rawQuantities = rawQuantities;
+    }
 
     /**
      * Formats a Map of symptoms/quantities into a StringBuilder ready to be written
      * 
-     * @see classes.OutputFileWriter where method is called
-     *
-     * @param  Map<String, Integer> from constructor attribute
+     * @param Map<String, Integer> from constructor attribute
      * @return StringBuilder with one 'symtpom: quantity' per line
      * @throws EmptyListException EmptyListException if the raw list of entry was
      *                            empty
@@ -27,9 +30,7 @@ public class SymptomsFormatter implements IFormatter {
      *                            EmptyListException if the raw list of entry was
      *                            empty
      */
-    @Override
-    public StringBuilder format() throws IOException, EmptyListException {
-        StringBuilder formattedList = new StringBuilder();
+    public StringBuilder formatSymptoms() throws IOException, EmptyListException {
         Set<String> items = rawQuantities.keySet();
         formattedList.append("List of symptoms and their occurence:\n");
         for (String item : items) {
